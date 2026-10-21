@@ -1,0 +1,15 @@
+services:
+  - type: worker
+    name: telegram-history-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DB_PATH
+        value: /var/data/history.db
+    disk:
+      name: telegram-history-data
+      mountPath: /var/data
+      sizeGB: 1
